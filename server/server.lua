@@ -1,6 +1,10 @@
-JobsCache = ESX.GetJobs()
+JobsCache = {
+  ["unemployed"] = { label = "Unemployed", grades = { ["0"] = { grade = 0, label = "Unemployed" } } }
+}
 
 MySQL.ready(function()
+  RefreshJobs()
+
   local doesUsersExist = MySQL.query.await("SHOW TABLES LIKE 'users';")
   if not doesUsersExist then
     print("[visualz_multijob] Could not check if table 'users' exists in database")

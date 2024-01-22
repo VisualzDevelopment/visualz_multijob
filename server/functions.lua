@@ -1,3 +1,33 @@
+function RefreshJobs()
+  local Jobs = {}
+  local jobs = MySQL.query.await("SELECT * FROM jobs")
+
+  for _, v in ipairs(jobs) do
+    Jobs[v.name] = v
+    Jobs[v.name].grades = {}
+  end
+
+  local jobGrades = MySQL.query.await("SELECT * FROM job_grades")
+
+  for _, v in ipairs(jobGrades) do
+    if Jobs[v.job_name] then
+      Jobs[v.job_name].grades[tostring(v.grade)] = v
+    end
+  end
+
+  for _, v in pairs(Jobs) do
+    if ESX.Table.SizeOf(v.grades) == 0 then
+      Jobs[v.name] = nil
+    end
+  end
+
+  if not Jobs then
+    return
+  end
+
+  JobsCache = Jobs
+end
+
 function GetPlayerJobsUtil(xPlayer)
   local playerDB = MySQL.single.await("SELECT `jobs` FROM `users` WHERE `identifier` = ? LIMIT 1", {
     xPlayer.identifier
