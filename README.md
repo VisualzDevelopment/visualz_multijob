@@ -4,7 +4,7 @@ FiveM Multi Job made for ESX, a simple menu that shows which jobs you have, make
 
 ### Features:
 
-- Save, select, remove and go off duty.
+- Save, select, remove and a off duty like function.
 - Auto saves jobs given via esx /setjob, via the AddEventHandler "esx:setJob".
 - Automatically create the columns needed in your database.
 - Ox context menu for clean overview of your jobs.
