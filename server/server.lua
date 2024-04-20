@@ -74,7 +74,7 @@ lib.addCommand(Config.AdminCommands.GiveJob.command, {
   }
 }, function(source, args)
   local xPlayer = ESX.GetPlayerFromId(source)
-  if not xPlayer or not xPlayer.getGroup() == "admin" then
+  if not xPlayer or xPlayer.getGroup() ~= "admin" then
     return TriggerClientEvent("ox_lib:notify", source, { type = "error", description = "Du har ikke adgang til denne kommando." })
   end
 
@@ -143,7 +143,7 @@ lib.addCommand(Config.AdminCommands.RemoveJob.command, {
   }
 }, function(source, args)
   local xPlayer = ESX.GetPlayerFromId(source)
-  if not xPlayer or not xPlayer.getGroup() == "admin" then
+  if not xPlayer or xPlayer.getGroup() ~= "admin" then
     return TriggerClientEvent("ox_lib:notify", source, { type = "error", description = "Du har ikke adgang til denne kommando." })
   end
 
